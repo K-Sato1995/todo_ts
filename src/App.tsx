@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, ChangeEvent } from "react";
 import "./App.css";
 import TodoList from "./components/TodoList";
 import TodoForm from "./components/TodoForm";
@@ -23,12 +23,22 @@ const App: React.FC = () => {
         finished: false
       }
     ]);
+    // clear the input value.
+    setTodoValue("");
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setTodoValue(event.currentTarget.value);
   };
 
   return (
     <div className="App">
       <h1>Welcome to my todo App</h1>
-      <TodoForm onSubmit={handleSubmit} />
+      <TodoForm
+        onSubmit={handleSubmit}
+        onInputChange={handleChange}
+        inputValue={todoValue}
+      />
       <TodoList todos={todos} />
     </div>
   );
