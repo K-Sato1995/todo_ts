@@ -1,10 +1,17 @@
 import React from "react";
 import TodoListItem from "./TodoListItem";
+import { Todo } from "../interfaces/Todo";
 
-const TodoList = () => {
+interface Props {
+  todos: Todo[];
+}
+
+const TodoList = ({ todos }: Props) => {
   return (
     <ul>
-      <TodoListItem todo={{ task: "test Task", finished: false }} />
+      {todos.map(todo => (
+        <TodoListItem todo={{ task: todo.task, finished: todo.finished }} />
+      ))}
     </ul>
   );
 };
